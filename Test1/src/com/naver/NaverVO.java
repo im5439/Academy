@@ -1,5 +1,7 @@
 package com.naver;
 
+import java.io.Serializable;
+
 // List Collection으로 회원가입 만들기
 // 메뉴 : 회원가입,회원전체출력, 아이디검색...
 // 조건 : 회원가입시 아이디는 8~15자 이내, 영문자 숫자 혼용
@@ -7,7 +9,7 @@ package com.naver;
 // PW1 PW2 비교하여 하나만 저장
 // 입력 출력 삭제 아이디검색
 
-public class NaverVO {
+public class NaverVO implements Serializable {
 
 	private String id;
 	private String pw;

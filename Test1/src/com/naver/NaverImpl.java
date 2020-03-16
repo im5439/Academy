@@ -1,7 +1,9 @@
 package com.naver;
 
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,7 +23,6 @@ public class NaverImpl implements Naver {
 
 	String id, pw, name;
 
-	
 	@Override
 	public void input() {
 
@@ -40,7 +41,7 @@ public class NaverImpl implements Naver {
 					return;
 				}
 			}
-			
+
 			for (int i = 0; i < vo.getId().length(); i++) {
 				char ch = vo.getId().charAt(i);
 				if ((ch < 48 || ch > 57) && (ch < 65 || ch > 90) && (ch < 97 || ch > 122)) {
@@ -48,12 +49,11 @@ public class NaverImpl implements Naver {
 					continue;
 				}
 			}
-			
+
 			if (vo.getId().length() < 7 || vo.getId().length() > 16) {
 				System.out.println("ID는 8~15자 이내");
 				continue;
 			}
-
 
 			// 입력받은 id의 영문/숫자 혼용인지 확인
 			int num = 0;
@@ -86,7 +86,7 @@ public class NaverImpl implements Naver {
 			}
 			break;
 		}
-		
+
 		System.out.print("이름 : ");
 		vo.setName(sc.next());
 
@@ -101,9 +101,9 @@ public class NaverImpl implements Naver {
 
 		System.out.print("전화번호 : ");
 		vo.setTel(sc.next());
-		
+
 		lists.add(vo);
-		
+
 		System.out.print("\n가입중");
 		thread();
 		System.out.println("\n\n가입완료!!\n");
@@ -111,10 +111,10 @@ public class NaverImpl implements Naver {
 
 	@Override
 	public void print() {
-		
+
 		System.out.print("\n목록을 불러오는중");
 		thread();
-		
+
 		System.out.println();
 		Iterator<NaverVO> it = lists.iterator();
 		System.out.println("현재 회원수: " + lists.size());
@@ -145,9 +145,9 @@ public class NaverImpl implements Naver {
 //				System.out.print("정말로 삭제하시겠습니까?(Y/N) ");
 //				char yn = (char) sc.nextByte();
 //				if (yn == 'Y' || yn == 'y') {
-					lists.remove(vo);
-					System.out.println("삭제완료!");
-					return;
+				lists.remove(vo);
+				System.out.println("삭제완료!");
+				return;
 //				} else {
 //					System.out.println("취소");
 //					return;
@@ -173,9 +173,9 @@ public class NaverImpl implements Naver {
 		while (it.hasNext()) {
 
 			NaverVO vo = it.next();
-			
+
 			MyException auth = new MyException();
-			
+
 			if (id.equals(vo.getId()) && pw.equals(vo.getPw())) { // id, PW 둘다 일치하는지 확인
 
 				while (true) {
@@ -186,9 +186,9 @@ public class NaverImpl implements Naver {
 						System.out.println("----------------------------------------------------------");
 						System.out.print("> ");
 						String set = sc.next();
-						
+
 						auth.inputformat(set);
-						
+
 						switch (set) {
 						case "1":
 							while (true) {
@@ -242,7 +242,7 @@ public class NaverImpl implements Naver {
 						System.out.println("숫자만 입력 가능합니다.");
 						continue;
 					}
-					
+
 					return;
 				}
 
@@ -254,7 +254,6 @@ public class NaverImpl implements Naver {
 
 	@Override
 	public void findId() {
-		
 
 		System.out.print("검색할 ID를 입력하세요. : ");
 		id = sc.next();
@@ -262,7 +261,7 @@ public class NaverImpl implements Naver {
 		System.out.print("\n검색중");
 		thread();
 		System.out.println();
-		
+
 		Iterator<NaverVO> it = lists.iterator();
 		while (it.hasNext()) {
 
@@ -283,7 +282,7 @@ public class NaverImpl implements Naver {
 
 		System.out.print("검색할 이름을 입력하세요. : ");
 		name = sc.next();
-		
+
 		System.out.print("\n검색중");
 		thread();
 		System.out.println();
@@ -295,35 +294,64 @@ public class NaverImpl implements Naver {
 			if (name.equals(vo.getName())) {
 				System.out.println(vo.toString());
 				return;
-			} else if (!name.equals(vo.getName())) 
+			} else if (!name.equals(vo.getName()))
 				System.out.println("잘못된 이름입니다.");
 
 		}
 
 	}
-	
+
 	@Override
 	public void saveInfo() {
-		
+
 		try {
-			FileOutputStream fos = new FileOutputStream("d:\\doc\\people.txt");
-			BufferedOutputStream bos = new BufferedOutputStream(fos);
-			ObjectOutputStream oos = new ObjectOutputStream(bos);
-			
-			while(lists != null) {
-				oos.writeObject(lists);
-			}
-			
+			FileOutputStream fos = new FileOutputStream("d:\\doc\\saveInfo.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+			oos.writeObject(lists);
+			oos.close();
+			fos.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+		System.out.print("회원목록 저장중");
+		thread();
+		System.out.println("\n회원목록 저장완료!!");
+
 	}
-	
-	
+
+	@Override
+	public void readInfo() {
+
+		try {
+
+			FileInputStream fis = new FileInputStream("d:\\doc\\saveInfo.txt");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+
+			ArrayList<NaverVO> list = (ArrayList<NaverVO>) ois.readObject();
+			
+			Iterator<NaverVO> it = list.iterator();
+			while(it.hasNext()) {
+				
+				NaverVO vo = it.next();
+				lists.add(vo);
+				
+			}
+			
+			
+			ois.close();
+			fis.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
 	@Override
 	public void thread() {
-		
+
 		Thread t = new Thread(new MyThread());
 		t.start();
 		try {
@@ -331,7 +359,7 @@ public class NaverImpl implements Naver {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	
+
 	}
 
 }

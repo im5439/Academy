@@ -28,6 +28,8 @@ public class NaverMain {
 		MyException auth = new MyException();
 
 		String set;
+		
+		ob.readInfo();
 
 		while (true) {
 			try {
