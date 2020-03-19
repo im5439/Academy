@@ -113,7 +113,7 @@ public class Test2 extends JFrame implements ActionListener {
 			data[4] = Integer.toString(tot); // 총점 넣음
 			data[5] = Integer.toString(tot / 3); // 평균
 
-			((MyTableModel) table.getModel()).addRow(data);
+			((MyTableModel) table.getModel()).addRow(data); // 가로열: row,   세로열: field, column
 
 			// 초기화
 			for (int i = 0; i < tf.length; i++) {

@@ -68,7 +68,6 @@ public class Test4 extends Frame implements ActionListener {
 			
 			String s = conn.getContentType();
 			ta.setText("MIME TYPE: " + s);
-//			
 			
 			while ((str = br.readLine()) != null) {
 				

@@ -69,7 +69,7 @@ public class ServerTest extends Frame implements ActionListener, Runnable {
 
 			ip = sc.getInetAddress().getHostAddress(); // 클라이언트IP
 
-			ta.append("\n\r[" + ip + "] 접속!!");
+			ta.append("\r\n[" + ip + "] 접속!!");
 
 			while ((str = br.readLine()) != null) {
 				ta.append("\r\n" + str);

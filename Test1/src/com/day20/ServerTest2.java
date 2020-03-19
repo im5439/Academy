@@ -54,8 +54,8 @@ public class ServerTest2 {
 
 				BufferedReader br = new BufferedReader(new InputStreamReader(sc.getInputStream()));
 
-				ip = sc.getInetAddress().getHostAddress();
-
+				ip = sc.getInetAddress().getHostAddress(); // getInetAddress() : 소켓의 접속처의 주소를 돌려줍니다.반환값-이 소켓의 접속처의 원격 IP 주소. 소켓이 접속되어 있지 않은 경우는 null
+														   // getHostAddress() : 텍스트 표현의 IP 주소 캐릭터 라인을 돌려줍니다.
 				clients.add(sc);
 
 				msg = ip + "]가 입장했습니다. ";
