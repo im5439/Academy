@@ -1,6 +1,5 @@
 package com.day19;
 
-import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Frame;
 import java.awt.TextArea;
