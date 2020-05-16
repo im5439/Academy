@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.db.DBConn;
 
-import oracle.jdbc.OracleTypes;
+//import oracle.jdbc.OracleTypes;
 
 public class ScoreDAO { // Data Access Object
 
@@ -62,7 +62,7 @@ public class ScoreDAO { // Data Access Object
 			cstmt = conn.prepareCall(sql);
 			
 			//out파라미터 자료형
-			cstmt.registerOutParameter(1, OracleTypes.CURSOR); // OracleType 프로젝트폴더 우클릭하고 Build Path -> Configure Build Path -> Libraries -> add_External_JARs 에서 ojdbc6.jar 
+//			cstmt.registerOutParameter(1, OracleTypes.CURSOR); // OracleType 프로젝트폴더 우클릭하고 Build Path -> Configure Build Path -> Libraries -> add_External_JARs 에서 ojdbc6.jar 
 			
 			//프로시저 실행
 			cstmt.executeUpdate(); // ? 에서 데이터가 나옴
@@ -176,7 +176,7 @@ public class ScoreDAO { // Data Access Object
 			cstmt = conn.prepareCall(sql);
 
 			//out파라미터 자료형 선언
-			cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+//			cstmt.registerOutParameter(1, OracleTypes.CURSOR);
 			
 			//in파라미터 자료형 선언
 			cstmt.setString(2, hak);

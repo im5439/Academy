@@ -15,9 +15,9 @@ public class DBConn {
 
 			try {
 										// type4(thin) : IP : oracle의 기본포트(1521)
-				String url = "jdbc:oracle:thin:@192.168.16.27:1521:TestDB";
-				String user = "suzi";
-				String password = "a123";
+				String url = "jdbc:oracle:thin:@192.168.200.184:1521:xe";
+				String user = "chung";
+				String password = "5439";
 
 				Class.forName("oracle.jdbc.driver.OracleDriver"); // OracleDriver의 모든 정보를 읽어온다.
 

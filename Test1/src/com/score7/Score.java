@@ -9,6 +9,7 @@ public class Score {
 	Scanner sc = new Scanner(System.in);
 	ScoreDAO dao = new ScoreDAO();
 
+	//추가
 	public void insert() {
 
 		try {
@@ -60,7 +61,8 @@ public class Score {
 		System.out.println();
 
 	}
-
+	
+	//수정
 	public void update() {
 
 		try {
@@ -92,6 +94,7 @@ public class Score {
 
 	}
 
+	//삭제
 	public void delete() {
 
 		try {

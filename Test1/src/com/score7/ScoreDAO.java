@@ -17,7 +17,7 @@ public class ScoreDAO { // Data Access Object
 
 		Connection conn = DBConn.getConnection();
 
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt = null; //프리컴파일 된 SQL 문을 나타내는 객체 
 		String sql;
 
 		try {
@@ -32,7 +32,7 @@ public class ScoreDAO { // Data Access Object
 			pstmt.setInt(4, dto.getEng());
 			pstmt.setInt(5, dto.getMat());
 
-			result = pstmt.executeUpdate();
+			result = pstmt.executeUpdate(); //지정된 SQL 문을 실행합니다.
 
 			pstmt.close();
 
@@ -44,13 +44,14 @@ public class ScoreDAO { // Data Access Object
 
 	}
 
+	//전체 출력 select된 데이터를 List에 담음
 	public List<ScoreDTO> getList() {
 
 		List<ScoreDTO> lists = new ArrayList<ScoreDTO>();
 
 		Connection conn = DBConn.getConnection();
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet rs = null; // 데이타베이스의 결과 세트를 나타내는 데이터의 테이블
 		String sql;
 
 		try {
